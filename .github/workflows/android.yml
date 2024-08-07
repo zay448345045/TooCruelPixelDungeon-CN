@@ -19,21 +19,22 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-    - name: Set up JDK 8 for compilation
-      uses: actions/setup-java@v4
-      id: setup-java-8
-      with:
-        java-version: '8'
-        distribution: 'temurin'
+ #   - name: Set up JDK 8 for compilation
+#      uses: actions/setup-java@v4
+ #     id: setup-java-8
+#      with:
+#        java-version: '8'
+ #       distribution: 'temurin'
         #distribution: 'adopt'
-    - name: Set JAVA_HOME to JDK 11 for Gradle
-      run: echo "JAVA_HOME=${{ steps.setup-java-11.outputs.path }}" >> $GITHUB_ENV
+#    - name: Set JAVA_HOME to JDK 11 for Gradle
+#      run: echo "JAVA_HOME=${{ steps.setup-java-11.outputs.path }}" >> $GITHUB_ENV
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: |
-       export JAVA_HOME=${{ steps.setup-java-8.outputs.path }}
+      run: 
+      #|
+#       export JAVA_HOME=${{ steps.setup-java-8.outputs.path }}
        ./gradlew assembleDebug 
       #build
     - name: Upload APK
