@@ -11,6 +11,9 @@ sourceCompatibility = 23
 targetCompatibility = 23
 
     
+sourceCompatibility = JavaVersion.VERSION_23 // 使用 Java 23 的语法
+        
+targetCompatibility = JavaVersion.VERSION_23 // 生成兼容 Java 23 的字节码
  //       targetCompatibility = 23
 //1.8 JavaVersion.VERSION_23
     }
