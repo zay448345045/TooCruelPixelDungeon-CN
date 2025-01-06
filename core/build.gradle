@@ -1,8 +1,12 @@
 apply plugin: 'java-library'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-sourceCompatibility = targetCompatibility = appJavaCompatibility
+#sourceCompatibility = targetCompatibility = appJavaCompatibility
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_23 // 或其他你需要的版本
+    targetCompatibility = JavaVersion.VERSION_23 // 必须和 sourceCompatibility 一致
+}
 dependencies {
     api project(':SPD-classes')
     //TODO might be nice to remove this, should decide
