@@ -3,7 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion appAndroidCompileSDK
     compileOptions {
-        targetCompatibility = 1.8
+        targetCompatibility = 23
+//1.8
     }
     compileOptions.sourceCompatibility = compileOptions.targetCompatibility = appJavaCompatibility
 
