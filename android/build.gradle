@@ -17,7 +17,7 @@ targetCompatibility = JavaVersion.VERSION_23 // 生成兼容 Java 23 的字节�
  //       targetCompatibility = 23
 //1.8 JavaVersion.VERSION_23
     }
-    compileOptions.sourceCompatibility = compileOptions.targetCompatibility
+//    compileOptions.sourceCompatibility = compileOptions.targetCompatibility
 // = appJavaCompatibility
 
     sourceSets.main.assets.srcDirs = [new File(project(':core').projectDir, "/src/main/assets")]
