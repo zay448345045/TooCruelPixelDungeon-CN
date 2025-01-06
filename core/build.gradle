@@ -1,7 +1,7 @@
 apply plugin: 'java-library'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-#sourceCompatibility = targetCompatibility = appJavaCompatibility
+//sourceCompatibility = targetCompatibility = appJavaCompatibility
 
 java {
     sourceCompatibility = JavaVersion.VERSION_23 // 或其他你需要的版本
