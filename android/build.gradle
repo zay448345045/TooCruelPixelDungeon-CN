@@ -10,7 +10,8 @@ sourceCompatibility JavaVersion.VERSION_23
  //       targetCompatibility = 23
 //1.8
     }
-    compileOptions.sourceCompatibility = compileOptions.targetCompatibility = appJavaCompatibility
+    compileOptions.sourceCompatibility = compileOptions.targetCompatibility
+// = appJavaCompatibility
 
     sourceSets.main.assets.srcDirs = [new File(project(':core').projectDir, "/src/main/assets")]
 
