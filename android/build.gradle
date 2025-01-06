@@ -5,10 +5,11 @@ namespace "com.shatteredpixel.shatteredpixeldungeon.android"
     compileSdkVersion appAndroidCompileSDK
     compileOptions {
 
-sourceCompatibility JavaVersion.VERSION_23
+//sourceCompatibility JavaVersion.VERSION_23
 
       
-targetCompatibility JavaVersion.VERSION_23
+//targetCompatibility JavaVersion.VERSION_23
+
     
  //       targetCompatibility = 23
 //1.8
