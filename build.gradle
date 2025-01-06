@@ -4,7 +4,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'com.android.tools.build:gradle:8.7.3'
+//7.0.4
     }
 }
 
@@ -16,13 +17,15 @@ allprojects {
 
         appVersionCode = 591
         appVersionName = '1.1.0-dev4'
-        appJavaCompatibility = JavaVersion.VERSION_1_8
+//        appJavaCompatibility = JavaVersion.VERSION_1_8
 
-        appAndroidCompileSDK = 31
+        appAndroidCompileSDK = 35
+//31
         appAndroidMinSDK = 14
-        appAndroidTargetSDK = 31
+        appAndroidTargetSDK = 35
 
-        gdxVersion = '1.10.0'
+        gdxVersion = '1.12.1'
+//'1.10.0'
         robovmVersion = '2.3.14'
     }
     version = appVersionName
