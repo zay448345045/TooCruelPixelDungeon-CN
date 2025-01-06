@@ -6,6 +6,8 @@ apply plugin: 'java-library'
 java {
     sourceCompatibility = JavaVersion.VERSION_23 // 或其他你需要的版本
     targetCompatibility = JavaVersion.VERSION_23 // 必须和 sourceCompatibility 一致
+sourceCompatibility = 23 // 或其他你需要的版本
+targetCompatibility = 23 // 必须和 sourceCompatibility 一致
 }
 dependencies {
     api project(':SPD-classes')
