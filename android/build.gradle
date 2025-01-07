@@ -113,9 +113,11 @@ task copyAndroidNatives() {
     }
 }
 
+/*
 tasks.withType(JavaCompile) {
     options.compilerArgs = [
         '--add-exports', 'jdk.internal.vm.ci/jdk.vm.ci.code.site=ALL-UNNAMED', // 针对第一个错误
         '--add-opens', 'java.base/sun.net.www.protocol.file=ALL-UNNAMED'       // 针对第二个错误
     ]
 }
+*/
