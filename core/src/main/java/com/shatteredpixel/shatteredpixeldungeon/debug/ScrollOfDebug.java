@@ -768,7 +768,13 @@ StringWriter sw = new StringWriter();
 
                     if (connection instanceof JarURLConnection) {
                         checkJarFile((JarURLConnection) connection, pckgname, root);
-                    } else if (connection instanceof FileURLConnection) {
+                    } 
+
+
+
+/*
+
+ else if (connection instanceof FileURLConnection) {
                         try {
                             checkDirectory(
                                     new File(URLDecoder.decode(url.getPath(),
@@ -781,7 +787,27 @@ StringWriter sw = new StringWriter();
                     } else
                         throw new ClassNotFoundException(
                                 pckgname +" ("+ url.getPath() +") does not appear to be a valid package");
-                } catch (final IOException ioex) {
+                } 
+
+*/
+
+else if (url.getProtocol().equals("file")) {
+    try {
+        File file = new File(url.toURI());
+        if (file.exists() && file.isDirectory()) {
+            checkDirectory(file, pckgname, root);
+        } else {
+            GLog.w("不是有效的目录：" + file.getAbsolutePath());
+        }
+    } catch (URISyntaxException | IllegalArgumentException e) {
+        throw new ClassNotFoundException("URL 格式错误或参数非法：" + url.toString(), e);
+    }
+} else {
+    GLog.w("不支持的 URL 协议：" + url.getProtocol() + "，URL：" + url.toString());
+}
+
+
+catch (final IOException ioex) {
                     throw new ClassNotFoundException(
                             "IOException was thrown when trying to get all resources for "
                                     + pckgname, ioex);
