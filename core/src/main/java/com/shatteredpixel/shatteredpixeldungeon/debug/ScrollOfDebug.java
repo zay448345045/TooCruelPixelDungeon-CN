@@ -49,11 +49,14 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.JarURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
+import java.net.URLConnection; //URLConnection是FileURLConnection的父类
 import java.net.URLDecoder;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.lang.reflect.InvocationTargetException;
+import java.io.StringWriter;
+import java.io.PrintWriter;
 /*
 import sun.net.www.protocol.file.FileURLConnection;
 */
