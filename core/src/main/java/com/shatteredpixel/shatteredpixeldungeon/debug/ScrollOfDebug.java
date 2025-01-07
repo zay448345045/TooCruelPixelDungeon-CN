@@ -390,13 +390,85 @@ public class ScrollOfDebug extends Scroll {
             if(method.getName().equalsIgnoreCase(methodName)) methods.add(method);
         }
         Collections.sort(methods, (m1, m2) -> m2.getParameterTypes().length - m1.getParameterTypes().length );
-        for(Method method : methods) try {
-            method.invoke(obj, getArguments(method.getParameterTypes(), args));
+        for(Method method : methods) 
+
+
+        {            
+            try { Object[] actualArgs = getArguments(method.getParameterTypes(), args); // 先获取参数，处理可能异常
+ /*           
+                URL url = obj.getClass().getProtectionDomain().getCodeSource().getLocation();
+
+                if (url != null && "file".equalsIgnoreCase(url.getProtocol())) {
+                    try {
+                        Path path = Paths.get(url.toURI());
+                        if (Files.exists(path)) {
+                            // 文件存在，可以进行操作，但此处不再需要使用文件路径进行任何操作，
+                            // 因为此处的目标是调用方法，而不是读取文件内容                
+GLog.w("Code source file not found: " + path);
+                        }
+catch (URISyntaxException e) {
+                    GLog.w("Error converting URL to URI: " + e.getMessage());
+                }
+            }
+            //无论是否是file协议，都尝试调用方法。
+*/                             
+            method.invoke(obj, actualArgs); // 在URL处理之后，只调用一次method.invoke()
+                          //getArguments(method.getParameterTypes(), args));
             return true;
-        } catch (Exception e) {/*do nothing */}
-        return false;
+/*
+                        } else {
+                            GLog.w("Code source file not found: " + path);
+                        }
+                        */
+                /*
+                    } catch (URISyntaxException e) {
+                        GLog.w("Error converting URL to URI: " + e.getMessage());
+                    } catch (SecurityException e) {
+                        GLog.w("SecurityException during method invoke: " + e.getMessage());
+                        */
+                
+                    } catch (IllegalArgumentException e) {
+                        GLog.w("IllegalArgumentException during method invoke: " + e.getMessage());
+                } catch (IllegalAccessException e) {
+            GLog.w("IllegalAccessException during method invoke (check accessibility): " + e.getMessage());
+        } catch (InvocationTargetException e) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.getCause().printStackTrace(pw);
+            GLog.w("Exception thrown by invoked method " + methodName + ": " + sw.toString());
+        } catch (NullPointerException e) {
+            GLog.w("NullPointerException during method invoke: " + e.getMessage());
+        }
+        }
+        /*
+                    }
+
+                } else {
+                    // 如果不是 file: 协议，则直接调用方法
+                    method.invoke(obj, getArguments(method.getParameterTypes(), args));
+                    return true; // 成功调用方法后返回
+                }
+                            
+        } catch (Exception e) {}  //do nothing
+
+StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                GLog.w("Error invoking method " + methodName + ": " + sw.toString());
+            }
+            }                  
+*/
+        return false; 
+            
     }
 
+
+
+
+
+
+
+    
     // throws an exception if it fails. This removes the need for me to handle errors at all.
     Object[] getArguments(Class[] params, String[] input) throws Exception {
         Object[] args = new Object[params.length];
