@@ -751,6 +751,52 @@ StringWriter sw = new StringWriter();
      *             if something went wrong
      */
     public static PackageTrie getClassesForPackage(String pckgname)
+        throws ClassNotFoundException {
+    PackageTrie root = new PackageTrie();
+    // root.
+
+    try {
+        if (loader == null) throw new ClassNotFoundException("Can't get class loader.");
+        final Enumeration<URL> resources = loader.getResources(pckgname.replace('.', '/'));
+        URLConnection connection;
+
+        while(resources.hasMoreElements()) {
+            URL url = resources.nextElement();
+            if(url == null) break;
+            try {
+                connection = url.openConnection();
+                if (connection instanceof JarURLConnection) {
+                    checkJarFile((JarURLConnection) connection, pckgname, root);
+                } else if (url.getProtocol().equals("file")) {
+                    // Handle file URLs
+                    try {
+                        checkDirectory(
+                                new File(URLDecoder.decode(url.getPath(),
+                                              "UTF-8")), pckgname, root);
+                    } catch (final UnsupportedEncodingException ex) {
+                        throw new ClassNotFoundException(
+                                pckgname + " does not appear to be a valid package (Unsupported encoding)",
+                                ex);
+                    }
+                } else {
+                    throw new ClassNotFoundException(
+                            pckgname + " does not appear to be a valid package",
+                            new Throwable("Unsupported URL protocol: " + url.getProtocol()));
+                }
+            } catch (IOException | URISyntaxException | IllegalArgumentException e) {
+                // Handle exceptions related to URL processing
+                e.printStackTrace(); // Log the exception for debugging
+            }
+        }
+    } catch (IOException e) {
+        // Handle IOException related to getResources
+        e.printStackTrace();
+    }
+
+    return root;
+        }
+    /*
+    public static PackageTrie getClassesForPackage(String pckgname)
             throws ClassNotFoundException {
         PackageTrie root = new PackageTrie(); // root.
 
@@ -771,7 +817,7 @@ StringWriter sw = new StringWriter();
                     } 
 
 
-
+*/
 /*
 
  else if (connection instanceof FileURLConnection) {
@@ -790,7 +836,7 @@ StringWriter sw = new StringWriter();
                 } 
 
 */
-
+/*
 else if (url.getProtocol().equals("file")) {
     try {
         File file = new File(url.toURI());
@@ -824,7 +870,7 @@ catch (final IOException ioex) {
         }
         return root;
     }
-
+*/
     private static PackageTrie checkDirectory(File directory, String pckgname, PackageTrie trie) throws ClassNotFoundException {
         File tmpDirectory;
 
