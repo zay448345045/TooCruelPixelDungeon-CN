@@ -398,7 +398,8 @@ public class ScrollOfDebug extends Scroll {
 
 
         {            
-            try { Object[] actualArgs = getArguments(method.getParameterTypes(), args); // 先获取参数，处理可能异常
+            try { 
+                Object[] actualArgs = getArguments(method.getParameterTypes(), args); // 先获取参数，处理可能异常
  /*           
                 URL url = obj.getClass().getProtectionDomain().getCodeSource().getLocation();
 
@@ -419,6 +420,14 @@ catch (URISyntaxException e) {
             method.invoke(obj, actualArgs); // 在URL处理之后，只调用一次method.invoke()
                           //getArguments(method.getParameterTypes(), args));
             return true;
+                    } catch (Exception e) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        GLog.w("Error invoking method " + methodName + ": " + sw.toString());
+    }
+}
+return false;
 /*
                         } else {
                             GLog.w("Code source file not found: " + path);
@@ -784,8 +793,8 @@ StringWriter sw = new StringWriter();
                             pckgname + " does not appear to be a valid package",
                             new Throwable("Unsupported URL protocol: " + url.getProtocol()));
                 }
-            } catch (IOException | URISyntaxException | IllegalArgumentException e) {
-                // Handle exceptions related to URL processing
+            } catch (IOException | IllegalArgumentException e) {
+                // Handle exceptions related to URL processing  | URISyntaxException
                 e.printStackTrace(); // Log the exception for debugging
             }
         }
