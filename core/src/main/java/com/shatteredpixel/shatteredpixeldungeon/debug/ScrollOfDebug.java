@@ -57,6 +57,7 @@ import java.util.jar.JarFile;
 import java.lang.reflect.InvocationTargetException;
 import java.io.StringWriter;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 /*
 import sun.net.www.protocol.file.FileURLConnection;
 */
